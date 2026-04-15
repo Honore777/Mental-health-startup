@@ -1,0 +1,15 @@
+node_modules/
+frontend/node_modules/
+build/
+dist/
+frontend/.next/
+frontend/out/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/.mypy_cache/

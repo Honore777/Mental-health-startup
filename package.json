@@ -1,0 +1,17 @@
+{
+  "name": "amahoro-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "scripts": {
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "backend:dev": "uvicorn app.main:app --reload --app-dir backend --port 8000",
+    "backend:migrate": "alembic -c backend/alembic.ini upgrade head",
+    "dev:all": "concurrently -k -n backend,frontend -c cyan,green \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "dev:stop": "powershell -NoProfile -Command \"$ports=@(3000,8000); foreach($p in $ports){ $c=Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; if($c){ $ids=$c|Select-Object -ExpandProperty OwningProcess -Unique; foreach($id in $ids){ Stop-Process -Id $id -Force -ErrorAction SilentlyContinue; Write-Output ('stopped PID=' + $id + ' on port ' + $p) } } }\"",
+    "dev:status": "powershell -NoProfile -Command \"$ports=@(3000,8000); foreach($p in $ports){ $c=Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; if($c){ $ids=($c|Select-Object -ExpandProperty OwningProcess -Unique)-join ','; Write-Output ('port ' + $p + ' listening pid=' + $ids) } else { Write-Output ('port ' + $p + ' not listening') } }\""
+  }
+}
