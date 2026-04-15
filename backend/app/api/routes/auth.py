@@ -56,7 +56,7 @@ async def register(payload: RegisterRequest, response: Response, db: AsyncSessio
         value=str(session.id),
         httponly=True,
         secure=settings.session_cookie_secure,
-        samesite="lax",
+        samesite=settings.session_cookie_samesite_normalized,
         max_age=settings.session_duration_hours * 3600,
     )
 
@@ -84,7 +84,7 @@ async def login(payload: LoginRequest, response: Response, db: AsyncSession = De
         value=str(session.id),
         httponly=True,
         secure=settings.session_cookie_secure,
-        samesite="lax",
+        samesite=settings.session_cookie_samesite_normalized,
         max_age=settings.session_duration_hours * 3600,
     )
 

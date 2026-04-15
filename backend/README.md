@@ -42,6 +42,13 @@ Use Python 3.12 to avoid source-build failures for transitive packages on Python
 3. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 4. Python version: set `PYTHON_VERSION=3.12.8` in Render environment variables.
 
+For Vercel frontend + Render backend authentication, also set:
+
+- `CORS_ORIGINS=https://mental-health-awareai.vercel.app`
+- `CORS_ORIGIN_REGEX=` (optional; use only if you need preview domains)
+- `SESSION_COOKIE_SECURE=true`
+- `SESSION_COOKIE_SAMESITE=none`
+
 This repo also includes `.python-version` and `runtime.txt` in `backend/` for explicit runtime pinning.
 
 ## API Surface
